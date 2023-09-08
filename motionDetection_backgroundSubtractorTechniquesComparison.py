@@ -3,6 +3,7 @@ import cv2
 import sys
 from random import randint
 import csv
+import imageio
 
 
 
@@ -17,7 +18,7 @@ BORDER_COLOR = (randint(0,255), randint(0, 255), randint(0, 255))
 FONT = cv2.FONT_HERSHEY_SIMPLEX
 TEXT_SIZE = 1.2
 
-Source = './videos/Animal_1.mp4'
+Source = './videos/Cars.mp4'
 
 
 TITLE_TEXT_POSITION = (100, 40)
@@ -45,6 +46,13 @@ cap = cv2.VideoCapture(Source)
 
 bg_subtractor = []
 
+original = []
+t_gmg = []
+t_mog = []
+t_mog2 = []
+t_knn = []
+t_cnt = []
+
 for i, a in enumerate(BGS_TYPES):
     #print(i, a)
     bg_subtractor.append(get_bgsubstructure(a))
@@ -53,7 +61,7 @@ for i, a in enumerate(BGS_TYPES):
 def main():
 
     framecount = 0
-    while cap.isOpened():
+    while True:
         ok, frame = cap.read()
 
         if not ok:
@@ -92,12 +100,25 @@ def main():
         cv2.imshow('KNN', knn)
         cv2.imshow('CNT', cnt)
 
+        original.append(frame)
+        t_mog.append(mog)
+        t_mog2.append(mog2)
+        t_cnt.append(cnt)
+        t_gmg.append(gmg)
+        t_knn.append(knn)
+
         k = cv2.waitKey(1) & 0xff
         if k == 27:
             break
-
+    cap.release()
+    cv2.destroyAllWindows()
 
 main()
-
+imageio.mimsave('./gif/ori.gif', original, duration=20)
+imageio.mimsave('./gif/mog.gif', t_mog, duration=20)
+imageio.mimsave('./gif/mog2.gif', t_mog2, duration=20)
+imageio.mimsave('./gif/knn.gif', t_knn, duration=20)
+imageio.mimsave('./gif/cnt.gif', t_cnt, duration=20)
+imageio.mimsave('./gif/gmg.gif', t_gmg, duration=20)
 cap.release()
 cv2.destroyAllWindows()

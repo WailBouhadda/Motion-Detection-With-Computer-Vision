@@ -2,6 +2,8 @@ import numpy as np
 import cv2
 import sys
 from random import randint
+import imageio
+
 
 
 TEXT_COLOR = (randint(0,255), randint(0, 255), randint(0, 255))
@@ -15,6 +17,7 @@ Source = './videos/Animal_1.mp4'
 
 
 BGS_TYPES = ['GMG', 'MOG2', 'MOG', 'KNN', 'CNT']
+
 
 
 
@@ -70,8 +73,8 @@ def get_bgsubstructure(BGS_TYPE):
 
 cap = cv2.VideoCapture(Source)
 
-
-
+motion_image_lst = []
+noBG_image_lst = []
 bg_subtractor = get_bgsubstructure(BGS_TYPES[1])
 
 
@@ -81,7 +84,7 @@ BGS_TYPE = BGS_TYPES[1]
 minArea = 250
 
 def main():
-    while cap.isOpened():
+    while True:
         ok, frame = cap.read()
 
         frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
@@ -110,12 +113,18 @@ def main():
         cv2.imshow('Frame', frame)
         cv2.imshow('Masked Frame', results)  # Show the masked frame
 
+        motion_image_lst.append(frame)
+        noBG_image_lst.append(results)
 
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
-
+    cap.release()
+    cv2.destroyAllWindows()
 
 
 main()
+imageio.mimsave('./gif/motion.gif', motion_image_lst[70:], duration=20)
+imageio.mimsave('./gif/noBG.gif', noBG_image_lst[70:], duration=20)
 cap.release()
 cv2.destroyAllWindows()
+
