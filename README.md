@@ -29,8 +29,7 @@ Motion detection is a fundamental concept in computer vision, widely used in sec
 
 - Five background subtraction types: 'GMG', 'MOG2', 'MOG', 'KNN', 'CNT'.
 
-![part1_split-video com_](https://github.com/WailBouhadda/Motion-Detection-With-Computer-Vision/assets/47559086/e7005f9a-0265-44d1-83f2-71dcb3cdd86c)
-
+![part1_split-video com_](https://github.com/WailBouhadda/Motion-Detection-With-Computer-Vision/assets/47559086/adfdd692-d68f-4a92-9cba-058adde0948c)
 
 ## Filters
 
