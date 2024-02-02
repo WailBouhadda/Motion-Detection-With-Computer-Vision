@@ -14,7 +14,7 @@ This Python project implements a motion detection algorithm using OpenCV. It was
   
 ## Background
 
-Motion detection is a fundamental concept in computer vision, widely used in security systems, surveillance, robotics, and more. This project was created as part of an online OpenCV course to help you learn and apply motion detection techniques effectively.
+Motion detection is a fundamental concept in computer vision, widely used in security systems, surveillance, robotics, and more. This project was created as part of an online OpenCV course to help you learn and apply motion detection techniques effectively
 
 ## Features
 
